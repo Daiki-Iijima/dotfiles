@@ -8,7 +8,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " 導入したいプラグインを以下に列挙
 " Plugin '[Github Author]/[Github repo]' の形式で記入
-Plugin 'airblade/vim-gitgutter'
 Plugin 'justmao945/vim-clang'
 Plugin 'lambdalisue/battery.vim'
 Plugin 'itchyny/lightline.vim'
@@ -18,10 +17,17 @@ call vundle#end()
 filetype plugin indent on
 " =============================
 
+if has('mac')
 colorscheme lucius
+endif
 
 set number				" 行番号を表示する
-set cursorline		" カーソルのある位置を強調表示する
+set cursorline
+
+" 文字コードの設定
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+
 set virtualedit=onemore		" カーソル移動を末尾の次の位置まで移動できるようにする
 set smartindent 		" インデントを自動で調整してくれる
 set shiftwidth=2	"	インデントを自動で合わせるときの空白数
@@ -39,6 +45,12 @@ set foldlevel=2        "ファイルを開いたときにデフォルトで折�
 set foldcolumn=3       "左端に折りたたみ状態を表示する領域を追加する
 
 let mapleader = "\<Space>" " スペースキーをショートカットのトリガーとして認識するように設定
+
+if has('win32') || has ('win64')
+set backspace=indent,eol,start
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=black
+"hi clear FoldColumn
+endif
 
 " ==== ノーマルモードでのキーバインドの追加 ====
 " Space + w (上書き保存)
@@ -109,3 +121,4 @@ let g:lightline = {
 
 let g:battery#update_tabline = 1    " For tabline.
 let g:battery#update_statusline = 1 " For statusline.
+
