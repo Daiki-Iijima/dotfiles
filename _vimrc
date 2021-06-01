@@ -27,10 +27,8 @@ filetype plugin indent on
 " =============================
 
 " ===== カラースキームの設定 ====
-if has('mac')
-	colorscheme gruvbox
-	set bg=dark
-endif
+colorscheme gruvbox
+set bg=dark
 " ===============================
 
 " ==== vim標準の設定 ====
@@ -148,10 +146,9 @@ set hidden            " ファイルを保存していなくても閉じられ�
 set nobackup          " バックアップファイルを作成しない
 set nowritebackup     " バックアップファイルを上書きしない
 set shortmess+=c      " 補完時の該当件数の表示をしない
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
+" signcolumn(画面一番下の部分)を常時表示する
 if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
+  " 新しいバージョンだとsigncolumnとnumbercolumnを１つの行で表示できるので、１つの行で表示するようにする
   set signcolumn=number
 else
   set signcolumn=yes
@@ -162,32 +159,33 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+" Ctrl + spaceで補完ウィンドウを閉じる
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
+" Enterで候補欄最初の行の文字を挿入する
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" エラーのある箇所にカーソルを移動する
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" GoTo code navigation.
+" コードナビゲーションへ移動
+" 定義へ移動
 nmap <silent> gd <Plug>(coc-definition)
+" 型の定義へ移動(使えないときが多い？）
 nmap <silent> gy <Plug>(coc-type-definition)
+" 実装へ移動
 nmap <silent> gi <Plug>(coc-implementation)
+" リファレンスを表示(vimgrepとcw使ってそう)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
+" カーソルの乗っているコードのドキュメント(定義の概要)を表示するgdの概要版
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -198,13 +196,13 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
+" カーソルの乗っているコードと同じ部分をハイライトする
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
+" リネーム
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
+" Space + f : 整形
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
