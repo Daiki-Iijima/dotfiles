@@ -16,11 +16,15 @@ Plugin 'open-browser.vim'             " ブラウザ検索を楽にする
 Plugin 'previm/previm'                " マークダウンをブラウザでリアルタイムプレビュー
 Plugin 'tpope/vim-surround'           " かっこやダブルクオートを便利にする
 Plugin 'ryanoasis/vim-devicons'       " NERDTreeにアイコンを表示
+Plugin 'tpope/vim-fugitive'           " gitを扱いやすくする
 "==== HTML関係 ====
 Plugin 'mattn/emmet-vim'              " HTMLのタグの入力を楽にする(Ctrl+k -> y)
 Plugin 'hail2u/vim-css3-syntax'       " cssのシンタックス
 " === 言語サーバー ===
 Plugin 'neoclide/coc.nvim',{'do': {-> coc#util#install()}}
+
+" === 言語パック ===
+Plugin 'sheerun/vim-polyglot'
 
 call vundle#end()
 filetype plugin indent on
@@ -111,6 +115,9 @@ imap <C-c> <Esc>
 " ---- NERDTree ----
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 
+" ---- vim-fugitive ----
+nnoremap <silent><C-g> :Gstatus<CR>
+
 " ---- open-browser.vim ----
 let g:netrw_nogx = 1
 nmap gx <Plug>(openbrowser-smart-search)
@@ -153,6 +160,12 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" coc-htmlでLaravelのbladeとpythonのjangoの補完を使えるようにする
+let g:coc_filetype_map = {
+  \ 'blade': 'html',
+  \ 'htmldjango': 'html',
+  \ }
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -276,3 +289,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" === vim-polyglot ===
+"let g:polyglot_disabled = ['markdown.plugin']
+let g:vim_markdown_new_list_item_indent = 2
