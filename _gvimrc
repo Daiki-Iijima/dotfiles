@@ -1,0 +1,48 @@
+" シンタックスハイライトの有効化
+syntax enable
+" カラーテーマを設定
+colorscheme gruvbox
+" フォント設定
+set guifont=Ricty\ Diminished:h12:cSHIFTJIS
+" 不可視文字の可視化
+set list
+set listchars=tab:»·,space:·
+" ヤンクやペースト時クリップボードの内容を使用する
+set clipboard=unnamed,autoselect
+" .swpファイルや~ファイル、un～ファイルなどが作成される場所を~\AppData\Local\Tempに変更
+set directory=~\AppData\Local\Temp
+set backupdir=~\AppData\Local\Temp
+set undodir=~\AppData\Local\Temp
+" デフォルトの文字コードをUTF-8へ
+set enc=utf-8
+set fileencoding=utf-8
+" Ricty Diminishedを使う場合アンチエイリアスの設定が必要、下記でアンチエイリアスの設定となる
+set renderoptions=type:directx,renmode:5
+" UTF-8にしたときメニューが文字化けするのでしないよう設定
+source $VIMRUNTIME/delmenu.vim
+set langmenu=ja_jp.utf-8
+source $VIMRUNTIME/menu.vim
+
+" ツールバーを削除
+set guioptions-=T
+
+"メニューを削除
+set guioptions-=m
+
+let g:save_window_file = expand('~/.vimwinpos')
+augroup SaveWindow
+  autocmd!
+  autocmd VimLeavePre * call s:save_window()
+  function! s:save_window()
+    let options = [
+      \ 'set columns=' . &columns,
+      \ 'set lines=' . &lines,
+      \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+      \ ]
+    call writefile(options, g:save_window_file)
+  endfunction
+augroup END
+
+if filereadable(g:save_window_file)
+  execute 'source' g:save_window_file
+endif

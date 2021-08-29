@@ -1,0 +1,38 @@
+set clipboard=unnamed
+nnoremap Y y$
+
+" >>>> キーマップ変更 <<<<
+let mapleader = "\<Space>"
+
+" >>>> ノーマルモード <<<<
+" ---- 論理行移動から表示行移動に変更 ----
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+" ----------------------------------------
+" Space + w (上書き保存)
+nnoremap <Leader>w :w<CR> 
+" Space + esc (vimを強制的に値を保存せずに抜ける)
+nnoremap <Leader><Esc> :q!<CR>
+" Space + wq (上書き保存してvimを抜ける)
+nnoremap <Leader>x :wq<CR> 
+" Shift + h (今カーソルがある行の末尾に移動する)
+nnoremap <S-h> ^
+" Shift + l (今カーソルがある行の先頭に移動する)
+nnoremap <S-l> $
+" 消去コマンドでヤンクするのを防ぐ
+nnoremap d "_d
+nnoremap D "_D
+nnoremap x "_x
+xnoremap d "_d
+xnoremap p "_dP
+
+" >>>> ヴィジュアルモード <<<<
+vnoremap <S-h> ^
+vnoremap <S-l> $
+
+" >>>> インサートモード <<<<
+imap <C-c> <Esc>
+imap <C-f> <Right>
+imap <C-b> <Left>
