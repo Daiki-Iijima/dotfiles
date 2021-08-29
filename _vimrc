@@ -26,6 +26,9 @@ Plugin 'neoclide/coc.nvim',{'do': {-> coc#util#install()}}
 " === 言語パック ===
 Plugin 'sheerun/vim-polyglot'
 
+Plugin 'w0rp/ale'
+Plugin 'tokorom/vim-swift-format'
+
 call vundle#end()
 filetype plugin indent on
 " =============================
@@ -110,6 +113,7 @@ vnoremap <S-l> $
 " >>>> インサートモード <<<<
 "	Ctrl + c (Escapeキーと同じ挙動にする)
 imap <C-c> <Esc>
+imap jj <Esc>
 
 " ==== プラグイン設定 ====
 " ---- NERDTree ----
@@ -293,3 +297,10 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " === vim-polyglot ===
 "let g:polyglot_disabled = ['markdown.plugin']
 let g:vim_markdown_new_list_item_indent = 2
+
+" === swift-format ===
+let g:ale_linters = {
+\   'swift': ['swift-format'],
+\}
+
+let g:vim_swift_format_use_ale = 1
