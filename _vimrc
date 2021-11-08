@@ -16,7 +16,6 @@ Plugin 'open-browser.vim'             " ブラウザ検索を楽にする
 Plugin 'previm/previm'                " マークダウンをブラウザでリアルタイムプレビュー
 Plugin 'tpope/vim-surround'           " かっこやダブルクオートを便利にする
 Plugin 'ryanoasis/vim-devicons'       " NERDTreeにアイコンを表示
-Plugin 'tpope/vim-fugitive'           " gitを扱いやすくする
 "==== HTML関係 ====
 Plugin 'mattn/emmet-vim'              " HTMLのタグの入力を楽にする(Ctrl+k -> y)
 Plugin 'hail2u/vim-css3-syntax'       " cssのシンタックス
@@ -28,6 +27,12 @@ Plugin 'sheerun/vim-polyglot'
 
 Plugin 'w0rp/ale'
 Plugin 'tokorom/vim-swift-format'
+
+" === C/C++の実行 ===
+Plugin 'xuhdev/SingleCompile'
+
+" === Vimのプレビューをターミナルで表示する ===
+Plugin 'skanehira/preview-markdown.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -116,6 +121,11 @@ imap <C-c> <Esc>
 imap jj <Esc>
 
 " ==== プラグイン設定 ====
+" ---- preview-markdown.vim ----
+let g:preview_markdown_vertical = 1   " 縦に分割
+let g:preview_markdown_auto_update = 1  " マークダウン保存時プレビューの自動更新
+set splitright  " 右側に表示
+
 " ---- NERDTree ----
 nnoremap <silent><C-n> :NERDTreeToggle<CR>
 
