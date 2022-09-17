@@ -26,3 +26,7 @@ vnoremap <S-l> $
 "	Ctrl + c (Escapeキーと同じ挙動にする)
 imap <C-c> <Esc>
 imap jj <Esc>
+
+" ToggleComment用
+xmap <C-/> <Plug>(VSCodeCommentary)gv
+nmap <C-/> <Plug>(VSCodeCommentaryLine)gv
