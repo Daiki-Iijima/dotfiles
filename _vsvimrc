@@ -28,6 +28,10 @@ nnoremap x "_x
 xnoremap d "_d
 xnoremap p "_dP
 
+" タブの移動
+nnoremap <Leader>p gt
+nnoremap <Leader>n gT
+
 " >>>> ヴィジュアルモード <<<<
 vnoremap <S-h> ^
 vnoremap <S-l> $
