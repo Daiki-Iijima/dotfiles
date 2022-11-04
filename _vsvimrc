@@ -36,3 +36,8 @@ vnoremap <S-l> $
 imap <C-c> <Esc>
 imap <C-f> <Right>
 imap <C-b> <Left>
+
+" ---- コメントアウト機能 ---
+" ToggleComment拡張プラグイン用
+nnoremap gc :vsc Edit.ToggleLineComment<CR>
+vnoremap gc :vsc Edit.ToggleLineComment<CR>
