@@ -1,16 +1,8 @@
-"" Source your .vimrc
-"source ~/.vimrc
-
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-set scrolloff=5
-
-" Do incremental searching.
+set clipboard=unnamed
 set incsearch
 
-" Don't use Ex mode, use Q for formatting.
-map Q gq
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
 
 " >>>> キーマップ変更 <<<<
 let mapleader = "\<Space>" " スペースキーをショートカットのトリガーとして認識するように設定
@@ -34,6 +26,8 @@ nnoremap <leader>h <C-w>h
 nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
 nnoremap <Leader>l <C-w>l
+nnoremap <Leader>n gt
+nnoremap <Leader>p gT
 " Ctrl + l (.vimrcの再読み込み)
 nnoremap <C-l> :source ~/.vimrc<CR>
 " Shift + h (今カーソルがある行の末尾に移動する)
@@ -57,9 +51,6 @@ vnoremap <S-l> $
 "	Ctrl + c (Escapeキーと同じ挙動にする)
 imap <C-c> <Esc>
 
-"   クリップボードを有効にする
-set clipboard=unnamed
-
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gs :action GotoSuperMethod<CR>
 nnoremap gi :action GotoImplementation<CR>
@@ -68,11 +59,18 @@ nnoremap gb :action JumpToLastChange<CR>
 nnoremap U :action FindUsages<CR>
 
 " リネーム
-nnoremap <leader>rn :action RenameElement<CR>
+nnoremap <leader>r :action RenameElement<CR>
 
 nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>
 
 " コメントアウト
-nnoremap cc :action CommentByLineComment<CR>
-vnoremap cc :action CommentByLineComment<CR>
+nnoremap <C-/> :action CommentByLineComment<CR>
+vnoremap <C-/> :action CommentByLineComment<CR>
+
+" ジャンプもとに戻る
+nnoremap <C--> <C-O>
+
+" quick documentを開く
+" JavaDocでJava以外の言語にも対応しているらしい
+nnoremap <Leader>q :action QuickJavaDoc<CR>
