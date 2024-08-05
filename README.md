@@ -42,42 +42,20 @@ mv .vimrc ./dotfiles/_vimrc
 ln ./dotfile/_vimrc ./.vimrc
 ```
 
-## Windowsのドットファイルの管理の仕方
+## Windows
 
-シンボリックリンクを作成して、ドットファイル本体は、Git管理しているフォルダの別ファイルを作成する
-Windowsの場合、ファイルの先頭は`.`ではなく`_`を使う
+シンボリックリンクを作成して管理する
 
-### Windows環境のシンボリックリンクの作成方法
+現在のバッチで対応しているのは、以下のファイル
 
-TODO : 追記
+- ホームディレクトリ
+  - _vsvimrc : Visual Studio用
+  - .ideavimrc : IntelliJ IDEA用
+- スタートアップディレクトリ
+  - AHKv2.ahk : AutoHotKeyのスクリプトファイル
 
-#### 1. ユーザーディレクトリにリポジトリをクローン
+### コマンド
 
-```bash
-cd C:\Users\DaikiIijima\
-git clone https://github.com/Daiki-Iijima/dotfiles.git dotfiles
-```
+Cloneしたディレクトリに移動した後、以下の`bat`を`管理者権限`で実行する
 
-#### 2. シンボリックリンクを作成
-
-シンボリックリンクの作成は、`mklink`コマンドを使用します。`コマンドプロンプトを管理者モード`で使用してください。
-
-- コマンド解説
-
-  ```bash
-  mklink リンク先 リンク元
-  ```
-
-実際に実行するコマンド
-
-```bash
-cd C:\Users\DaikiIijima\
-mklink  .\_vimrc .\dotfiles\_vimrc
-```
-
-- 一連の手順
-
-  ```bash
-  cd C:\Users\DaikiIijima\
-  git clone https://github.com/Daiki-Iijima/dotfiles.git dotfiles
-  ```
+- setup_symlinks.bat
