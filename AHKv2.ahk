@@ -3,8 +3,8 @@
 ;KeyHistory
 
 ^h::BS
-^f::Right
-^b::Left
+;^f::Right
+;^b::Left
 ^p::Up
 ^n::Down
 ^m::Enter
