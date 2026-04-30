@@ -1,0 +1,60 @@
+# 1行表示
+add_newline = false
+
+format = "$directory$git_branch$git_status$nodejs$golang$python$rust$java$character"
+
+# ---- Directory -------------------------------------------------
+[directory]
+truncation_length = 2
+truncate_to_repo = false
+style = "bold cyan"
+
+# ---- Git -------------------------------------------------------
+[git_branch]
+format = " [$symbol$branch]($style)"
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = '([$all_status]($style) )'
+style = "bold yellow"
+modified = "~$count"
+staged = "+$count"
+deleted = "-$count"
+untracked = "?$count"
+renamed = ""
+conflicted = ""
+ahead = ""
+behind = ""
+diverged = ""
+
+# ---- Languages -------------------------------------------------
+[nodejs]
+format = " [node:$version]($style)"
+style = "bold green"
+detect_files = ["package.json"]
+
+[golang]
+format = " [go:$version]($style)"
+style = "bold cyan"
+detect_files = ["go.mod"]
+
+[python]
+format = " [py:$version]($style)"
+style = "bold yellow"
+detect_files = ["pyproject.toml", "requirements.txt", ".python-version"]
+
+[rust]
+format = " [rs:$version]($style)"
+style = "bold red"
+detect_files = ["Cargo.toml"]
+
+[java]
+format = " [java:$version]($style)"
+style = "bold red"
+detect_files = ["pom.xml", "build.gradle"]
+
+# ---- Prompt character ------------------------------------------
+[character]
+success_symbol = " [❯](bold green)"
+error_symbol = " [❯](bold red)"

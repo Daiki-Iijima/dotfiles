@@ -1,67 +1,162 @@
-# 各ドットファイルをGitHubで管理する
+# dotfiles
 
-## 各ファイルの説明
+Daikiの設定ファイル集。シンボリックリンク方式で管理し、複数デバイスで同じ環境を再現する。
 
-### 設定ファイル
-
-- _gvimrc : KaoriYa Vim用の設定ファイル(このままでOK)
-  - [公式サイト](https://www.kaoriya.net/software/vim/)
-- _vimrc : Vim用の設定ファイル(.vimrcに変更が必要)
-- _vsvimrc : Visual Studio用の設定ファイル(このままでOK)
-- .ideavimrc : IntelliJ IDEA用の設定ファイル(このままでOK)
-
-### AHK用のスクリプト
-
-- AHKv1.ahk : AutoHotKeyのスクリプトファイル(AutoHotKey v1用)
-- AHKv2.ahk : AutoHotKeyのスクリプトファイル(AutoHotKey v2用)
-
-## AHKの設定ファイルの配置場所
-
-AHKはWindows専用のツールなので、Windows環境での操作を想定しています。
-
-1. Windows + Rキーを押して、`shell:startup`を入力して、Enterキーを押す
-2. 自動で起動させたいファイルを配置する
-
-- Version1の場合 : AHKv1.ahk
-- Version2の場合 : AHKv2.ahk
-
-基本は新しい環境ならVersion2でいいはず
-
-## Macのドットファイルの管理の仕方
-
-シンボリックリンクを作成して、ドットファイル本体は、Git管理しているフォルダの別ファイルを作成する
-
-### Mac環境のシンボリックリンクの作成方法
-
-dotfilesというフォルダにこのリポジトリをクローンする
+## セットアップ
 
 ```bash
-mkdir ./dotfiles
-cd ~
-mv .vimrc ./dotfiles/_vimrc
-ln ./dotfile/_vimrc ./.vimrc
+git clone https://github.com/Daiki-Iijima/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
 ```
 
-## Windows
+`install.sh` は既存ファイルを `.bak` にバックアップしてからシンボリックリンクを作成する。
 
-シンボリックリンクを作成して管理する
+### Gitの初期設定（初回のみ）
 
-現在のバッチで対応しているのは、以下のファイル
+```bash
+# ~/dotfiles/git/.gitconfig の [user] セクションを編集
+git config -f ~/dotfiles/git/.gitconfig user.name "Your Name"
+git config -f ~/dotfiles/git/.gitconfig user.email "your@email.com"
+```
 
-- ホームディレクトリ
-  - _vsvimrc : Visual Studio用
-  - .ideavimrc : IntelliJ IDEA用
-- スタートアップディレクトリ
-  - AHKv2.ahk : AutoHotKeyのスクリプトファイル
+---
 
-### コマンド
+## ツール一覧
 
-Cloneしたディレクトリに移動した後、以下の`bat`を`管理者権限`で実行する
+### WezTerm
 
-- setup_symlinks.bat
+**設定ファイル:** `wezterm/.wezterm.lua` → `~/.wezterm.lua`
 
-### 注意
+Rust製の高速ターミナルエミュレータ。GPU レンダリング対応。tmux の代替としてペイン分割・タブ管理を内蔵している。
 
-Gitを通すと改行コードが変わる可能性があるので`CRLF`に変更してから、batファイルを実行すること
+**主なキーバインド（Leader = `Ctrl+Space`）**
 
-エラーになって文字化けする
+| キー | 動作 |
+|------|------|
+| `Leader + \|` | ペイン縦分割 |
+| `Leader + -` | ペイン横分割 |
+| `Leader + h/j/k/l` | ペイン移動 |
+| `Leader + r` | リサイズモード |
+| `Leader + z` | ペインズーム（全画面トグル）|
+| `Leader + x` | ペインを閉じる |
+| `Leader + c` | 新規タブ |
+| `Leader + n/p` | 次/前のタブ |
+| `Leader + 1-9` | タブ番号指定 |
+| `Leader + ,` | タブ名変更 |
+| `Leader + [` | コピーモード |
+| `Ctrl + =/-/0` | フォントサイズ変更/リセット |
+
+---
+
+### Neovim
+
+**設定ファイル:** `nvim/` → `~/.config/nvim/`
+
+Vimベースのモダンなテキストエディタ。Lua で設定を記述し、lazy.nvim でプラグイン管理。
+
+```
+nvim/
+├── init.lua          # エントリポイント
+├── lazy-lock.json    # プラグインのバージョンロック
+└── lua/
+    ├── settings.lua  # 基本設定
+    ├── keymaps.lua   # キーバインド
+    ├── plugins/      # プラグイン設定
+    └── lang/         # 言語別設定
+```
+
+---
+
+### Zsh
+
+**設定ファイル:** `zsh/.zshrc` → `~/.zshrc`
+
+Z Shell の設定。以下のツールと連携している。
+
+| ツール | 役割 |
+|--------|------|
+| starship | プロンプト表示 |
+| zoxide | スマートな `cd`（`z` コマンド）|
+| atuin | シェル履歴の検索・管理 |
+| fzf | ファジーファインダー（`Ctrl+]` でghqリポジトリ選択）|
+| eza | `ls` の代替（アイコン・Git対応）|
+| bat | `cat` の代替（シンタックスハイライト）|
+| mise | 言語バージョン管理（Node, Python, Go等）|
+| yazi | ターミナルファイルマネージャー（`y` コマンド）|
+| direnv | ディレクトリ別の環境変数 |
+
+---
+
+### Starship
+
+**設定ファイル:** `starship/starship.toml` → `~/.config/starship.toml`
+
+Rust製の高速・クロスシェルプロンプト。Git状態・言語バージョン・実行時間などを表示。zsh/fish/bash 等あらゆるシェルで同じプロンプトを使える。
+
+---
+
+### Git
+
+**設定ファイル:** `git/.gitconfig` → `~/.gitconfig`
+
+| 設定 | 内容 |
+|------|------|
+| `core.pager` | delta（diff を美しく表示）|
+| `delta.side-by-side` | 横並びで差分表示 |
+| `pull.rebase` | pull 時に rebase を使用 |
+| `merge.conflictstyle` | diff3 スタイルでコンフリクト表示 |
+
+> **注意:** `[user]` の `name` と `email` はクローン後に各デバイスで設定すること。
+
+---
+
+### Atuin
+
+**設定ファイル:** `atuin/config.toml` → `~/.config/atuin/config.toml`
+
+シェル履歴を SQLite で管理するツール。`Ctrl+R` で高機能な履歴検索UIを表示。複数マシン間で履歴を同期することも可能（要サインアップ）。
+
+主な設定:
+- `enter_accept = true` — Enter で即実行、Tab で編集モード
+
+---
+
+### Claude Code
+
+**設定ファイル:** `claude/settings.json` → `~/.claude/settings.json`
+
+Anthropic の AI コーディングアシスタント CLI の設定。
+
+| 設定 | 内容 |
+|------|------|
+| `model` | 使用モデル（sonnet）|
+| `defaultMode` | `acceptEdits`（編集を自動承認）|
+| `voiceEnabled` | 音声入力有効 |
+| `enabledPlugins` | LSP プラグイン群（Swift, Lua, PHP, TypeScript, Rust, C++）|
+
+> **注意:** `mcpServers.unity-mcp` のパスはマシン固有。Unity を使わない場合はその設定を削除すること。
+
+---
+
+## 依存ツールのインストール（Mac）
+
+```bash
+# Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/homebrew/HEAD/install.sh)"
+
+# ターミナル
+brew install --cask wezterm
+
+# フォント（WezTermで使用）
+brew install --cask font-jetbrains-mono
+
+# シェルツール
+brew install starship zoxide atuin fzf bat eza ripgrep fd git-delta lazygit mise yazi
+
+# Zsh プラグイン
+brew install zsh-autosuggestions zsh-syntax-highlighting
+
+# その他
+brew install ghq direnv neovim git
+```
