@@ -3,6 +3,21 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 -- ──────────────────────────────────────────────
+-- プラットフォーム別: デフォルトシェル
+-- ──────────────────────────────────────────────
+if wezterm.target_triple:find("windows") then
+	-- Windows: WSL2 (Ubuntu) をデフォルトシェルとして使用
+	config.default_domain = "WSL:Ubuntu"
+	config.wsl_domains = {
+		{
+			name = "WSL:Ubuntu",
+			distribution = "Ubuntu",
+			default_cwd = "~",
+		},
+	}
+end
+
+-- ──────────────────────────────────────────────
 -- フォント
 -- ──────────────────────────────────────────────
 config.font = wezterm.font_with_fallback({
