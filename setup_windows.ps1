@@ -75,6 +75,9 @@ New-Link "$DOTFILES\atuin\config.toml" "$HOME\.config\atuin\config.toml"
 # Claude Code
 New-Link "$DOTFILES\claude\settings.json" "$HOME\.claude\settings.json"
 
+# mise
+New-Link "$DOTFILES\mise\config.toml" "$HOME\.config\mise\config.toml"
+
 # ──────────────────────────────────────────────
 # ~/.gitconfig.local (マシン固有設定)
 # ──────────────────────────────────────────────

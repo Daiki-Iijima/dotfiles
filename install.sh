@@ -41,6 +41,7 @@ link "$DOTFILES_DIR/starship/starship.toml"  "$HOME/.config/starship.toml"
 link "$DOTFILES_DIR/git/.gitconfig"          "$HOME/.gitconfig"
 link "$DOTFILES_DIR/atuin/config.toml"       "$HOME/.config/atuin/config.toml"
 link "$DOTFILES_DIR/claude/settings.json"    "$HOME/.claude/settings.json"
+link "$DOTFILES_DIR/mise/config.toml"        "$HOME/.config/mise/config.toml"
 
 # ──────────────────────────────────────────────
 # ~/.gitconfig.local (マシン固有設定)
