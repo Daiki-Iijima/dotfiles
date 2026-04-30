@@ -1,8 +1,6 @@
 [user]
 	name = YOUR_NAME
 	email = YOUR_EMAIL
-[credential]
-	helper = osxkeychain
 [core]
 	autocrlf = input
 	pager = delta
@@ -19,3 +17,5 @@
 	colormoved = default
 [pull]
 	rebase = true
+[include]
+	path = ~/.gitconfig.local
