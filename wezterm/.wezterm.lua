@@ -102,9 +102,9 @@ config.cursor_blink_rate = 500
 config.audible_bell = "Disabled"
 
 -- ──────────────────────────────────────────────
--- キーバインド (Leader = Ctrl+Space)
+-- キーバインド (Leader = Ctrl+t)
 -- ──────────────────────────────────────────────
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "t", mods = "CTRL", timeout_milliseconds = 1000 }
 
 config.keys = {
 	-- ペイン: 縦分割

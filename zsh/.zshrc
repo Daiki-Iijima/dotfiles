@@ -15,31 +15,51 @@ export LANG=ja_JP.UTF-8
 export LC_MESSAGES=ja_JP.UTF-8
 
 
+# ---- OS 判別 ---------------------------------------------------
+case "$OSTYPE" in
+  darwin*) IS_MAC=1 ;;
+  linux*)  IS_LINUX=1 ;;
+esac
+
 # ---- Paths / Env ------------------------------------------------
 export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
 
+# 共通パス (Mac/Linux 両方で使う)
 path=(
-  /opt/homebrew/bin
-  /opt/homebrew/opt/llvm/bin
-  /usr/local/bin
   "$GOPATH/bin"
   "$HOME/.local/bin"
+  "$HOME/.cargo/bin"          # rustup
+  "$HOME/.dotnet/tools"       # dotnet tool
+  "$HOME/.npm-global/bin"     # npm -g (prefix=~/.npm-global)
   "$HOME/.antigravity/antigravity/bin"
+  "/usr/local/bin"
   $path
 )
+
+# Mac 限定: Homebrew パス
+if [[ -n $IS_MAC ]]; then
+  path=(/opt/homebrew/bin /opt/homebrew/opt/llvm/bin $path)
+fi
+
 typeset -U path   # PATH の重複エントリを自動除去
 export PATH
 
 # ---- Zsh Completions -------------------------------------------
-if type brew &>/dev/null; then
+if [[ -n $IS_MAC ]] && type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 autoload -Uz compinit && compinit
 
 # ---- Zsh Plugins -----------------------------------------------
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Mac は Homebrew、Linux は apt パッケージのパスから読み込む
+if [[ -n $IS_MAC ]] && type brew &>/dev/null; then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 
 # ---- mise (言語バージョンマネージャー) --------------------------
@@ -131,8 +151,8 @@ bindkey '^G' _navi_lazy_init
 
 # ---- starship プロンプト (最後に評価) ---------------------------
 eval "$(starship init zsh)"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/daiki/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+# Docker CLI completions (Docker Desktop が居ればパスを追加)
+if [[ -d "$HOME/.docker/completions" ]]; then
+  fpath=("$HOME/.docker/completions" $fpath)
+  autoload -Uz compinit && compinit
+fi

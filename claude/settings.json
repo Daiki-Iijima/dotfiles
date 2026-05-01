@@ -1,5 +1,6 @@
 {
   "model": "sonnet",
+  "theme": "dark",
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
@@ -19,13 +20,5 @@
   },
   "voiceEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "mcpServers": {
-    "unity-mcp": {
-      "command": "~/.unity/relay/relay_mac_arm64.app/Contents/MacOS/relay_mac_arm64",
-      "args": [
-        "--mcp"
-      ]
-    }
-  },
   "defaultMode": "acceptEdits"
 }
