@@ -43,6 +43,15 @@ link "$DOTFILES_DIR/atuin/config.toml"       "$HOME/.config/atuin/config.toml"
 link "$DOTFILES_DIR/claude/settings.json"    "$HOME/.claude/settings.json"
 link "$DOTFILES_DIR/mise/config.toml"        "$HOME/.config/mise/config.toml"
 
+# Hyprland 系 (Linux のみ)
+if [ "$(uname)" = "Linux" ]; then
+  link "$DOTFILES_DIR/hypr"     "$HOME/.config/hypr"
+  link "$DOTFILES_DIR/waybar"   "$HOME/.config/waybar"
+  link "$DOTFILES_DIR/fuzzel"   "$HOME/.config/fuzzel"
+  link "$DOTFILES_DIR/dunst"    "$HOME/.config/dunst"
+  link "$DOTFILES_DIR/wlogout"  "$HOME/.config/wlogout"
+fi
+
 # ──────────────────────────────────────────────
 # ~/.gitconfig.local (マシン固有設定)
 # ──────────────────────────────────────────────

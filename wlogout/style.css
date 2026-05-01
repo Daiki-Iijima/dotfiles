@@ -1,0 +1,29 @@
+/* Tokyo Night - wlogout */
+
+* {
+    background-image: none;
+    box-shadow: none;
+    font-family: "JetBrains Mono", monospace;
+}
+
+window {
+    background-color: rgba(26, 27, 38, 0.85);
+}
+
+button {
+    color: #c0caf5;
+    background-color: #24283b;
+    border: 2px solid #414868;
+    border-radius: 12px;
+    margin: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25%;
+}
+
+button:focus, button:active, button:hover {
+    background-color: #1a1b26;
+    border-color: #7aa2f7;
+    color: #7aa2f7;
+    outline-style: none;
+}

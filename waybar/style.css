@@ -1,0 +1,62 @@
+/* Tokyo Night - Waybar */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Noto Sans CJK JP", monospace;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(26, 27, 38, 0.85);
+    color: #c0caf5;
+    border-bottom: 2px solid #7aa2f7;
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    background-color: transparent;
+    color: #565f89;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.active {
+    color: #7aa2f7;
+    border-bottom: 2px solid #7aa2f7;
+    background: rgba(122, 162, 247, 0.10);
+}
+
+#workspaces button:hover {
+    background: rgba(192, 202, 245, 0.05);
+    color: #c0caf5;
+}
+
+#window {
+    color: #9ece6a;
+    padding: 0 12px;
+}
+
+#clock {
+    color: #c0caf5;
+    font-weight: bold;
+    padding: 0 12px;
+}
+
+#cpu, #memory, #battery, #network, #pulseaudio, #tray {
+    padding: 0 8px;
+    margin: 0 2px;
+}
+
+#cpu        { color: #f7768e; }
+#memory     { color: #e0af68; }
+#battery    { color: #9ece6a; }
+#network    { color: #7dcfff; }
+#pulseaudio { color: #bb9af7; }
+
+#battery.warning  { color: #e0af68; }
+#battery.critical { color: #f7768e; }
