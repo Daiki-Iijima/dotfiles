@@ -1,6 +1,15 @@
 [user]
 	name = YOUR_NAME
 	email = YOUR_EMAIL
+	# signingkey はマシン毎に異なるので ~/.gitconfig.local で設定する
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
 [core]
 	autocrlf = input
 	pager = delta
