@@ -1,3 +1,8 @@
+# ---- tmux 自動起動 -----------------------------------------------
+if [[ -z "$TMUX" && -n "$PS1" && -x "$(command -v tmux)" ]]; then
+  exec tmux new-session -A -s main
+fi
+
 # ---- Zsh Options -----------------------------------------------
 setopt AUTO_CD
 setopt HIST_IGNORE_ALL_DUPS
@@ -10,56 +15,39 @@ SAVEHIST=10000
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 
+# ---- ターミナルフロー制御を無効化 (Ctrl+Space を tmux prefix として使うため) --
+stty -ixon 2>/dev/null
+
 # ---- Locale (日本語) --------------------------------------------
 export LANG=ja_JP.UTF-8
 export LC_MESSAGES=ja_JP.UTF-8
 
 
-# ---- OS 判別 ---------------------------------------------------
-case "$OSTYPE" in
-  darwin*) IS_MAC=1 ;;
-  linux*)  IS_LINUX=1 ;;
-esac
-
 # ---- Paths / Env ------------------------------------------------
 export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
 
-# 共通パス (Mac/Linux 両方で使う)
 path=(
+  /opt/homebrew/bin
+  /opt/homebrew/opt/llvm/bin
+  /usr/local/bin
   "$GOPATH/bin"
   "$HOME/.local/bin"
-  "$HOME/.cargo/bin"          # rustup
-  "$HOME/.dotnet/tools"       # dotnet tool
-  "$HOME/.npm-global/bin"     # npm -g (prefix=~/.npm-global)
   "$HOME/.antigravity/antigravity/bin"
-  "/usr/local/bin"
   $path
 )
-
-# Mac 限定: Homebrew パス
-if [[ -n $IS_MAC ]]; then
-  path=(/opt/homebrew/bin /opt/homebrew/opt/llvm/bin $path)
-fi
-
 typeset -U path   # PATH の重複エントリを自動除去
 export PATH
 
 # ---- Zsh Completions -------------------------------------------
-if [[ -n $IS_MAC ]] && type brew &>/dev/null; then
+if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 autoload -Uz compinit && compinit
 
 # ---- Zsh Plugins -----------------------------------------------
-# Mac は Homebrew、Linux は apt パッケージのパスから読み込む
-if [[ -n $IS_MAC ]] && type brew &>/dev/null; then
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # ---- mise (言語バージョンマネージャー) --------------------------
@@ -116,6 +104,9 @@ alias llt='eza -l --tree --icons --git --level=2'
 alias cat='bat --paging=never'
 alias less='bat'
 
+# ポート使用状況の一覧
+alias ports='lsof -iTCP -sTCP:LISTEN -P -n | awk "NR>1{printf \"%-12s %-6s %s\n\", \$1, \$3, \$9}" | sort -t: -k2 -n | uniq'
+
 
 # ---- zoxide (スマートな cd) ------------------------------------
 eval "$(zoxide init zsh)"
@@ -151,8 +142,5 @@ bindkey '^G' _navi_lazy_init
 
 # ---- starship プロンプト (最後に評価) ---------------------------
 eval "$(starship init zsh)"
-# Docker CLI completions (Docker Desktop が居ればパスを追加)
-if [[ -d "$HOME/.docker/completions" ]]; then
-  fpath=("$HOME/.docker/completions" $fpath)
-  autoload -Uz compinit && compinit
-fi
+
+alias claude-mem='bun "/Users/daiki/.claude/plugins/cache/thedotmack/claude-mem/12.1.1/scripts/worker-service.cjs"'

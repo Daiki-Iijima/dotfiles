@@ -1,0 +1,40 @@
+# =============================================================================
+# Ghostty 設定（Alacritty から移行）
+# =============================================================================
+
+# --- フォント ---
+font-family = HackGen35 Console NF
+font-size = 14
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = Bold Italic
+
+# --- ウィンドウ ---
+window-width = 200
+window-height = 60
+window-padding-x = 8
+window-padding-y = 4
+background-opacity = 0.85
+
+# --- カーソル ---
+cursor-style = bar
+
+# --- スクロール ---
+scrollback-limit = 100000
+
+# --- キーバインド ---
+# JIS キーボードの「¥」をバックスラッシュに
+keybind = backslash=text:\x5c
+
+# Ctrl+Shift+C → コピー
+keybind = ctrl+shift+c=copy_to_clipboard
+
+# Ctrl+Shift+V → ペースト
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Ctrl+Enter → CSI u プロトコルで正しく送信（Claude Code などで改行と区別するため）
+keybind = ctrl+enter=text:\x1b[13;5u
+
+# Shift+Enter → CSI u プロトコルで送信（Claude Code で改行）
+keybind = shift+enter=text:\x1b\x0d
