@@ -10,16 +10,34 @@ Daikiの設定ファイル集。**[chezmoi](https://www.chezmoi.io)** で Mac / 
 
 ### 0. age 秘密鍵を Bitwarden から取得
 
-新マシンでは最初に age 秘密鍵が必要 (これがないと暗号化ファイルが復号できない):
+新マシンでは最初に age 秘密鍵が必要 (これがないと暗号化ファイルが復号できない)。
 
-1. Bitwarden Desktop / Web Vault にログイン
-2. `chezmoi-age-key` アイテムの Attachments から `key.txt` をダウンロード
-3. 配置:
+Bitwarden Vault に Secure Note `chezmoi-age-key` を作成しておき、内容を取り出す。
+
+#### Free プラン (Notes 欄ペースト方式)
+
+1. Bitwarden Vault で `chezmoi-age-key` を開く → **Notes** 欄をコピー
+2. 配置:
+   ```bash
+   mkdir -p ~/.config/chezmoi
+   pbpaste > ~/.config/chezmoi/key.txt        # macOS
+   # Linux:   xclip -selection clipboard -o > ~/.config/chezmoi/key.txt
+   # Windows: notepad で貼って %USERPROFILE%\.config\chezmoi\key.txt に保存
+   chmod 600 ~/.config/chezmoi/key.txt
+   ```
+
+#### Premium プラン (Attachments 方式)
+
+1. `chezmoi-age-key` の **Attachments** から `key.txt` をダウンロード
+2. 配置:
    ```bash
    mkdir -p ~/.config/chezmoi
    mv ~/Downloads/key.txt ~/.config/chezmoi/key.txt
    chmod 600 ~/.config/chezmoi/key.txt
    ```
+
+> Bitwarden Free でもパスワード/SSH鍵/Note は無制限。**添付ファイルは Premium ($10/年) のみ**。
+> age 秘密鍵は ~189 バイトの text なので Notes 貼付で十分。
 
 ### 1. chezmoi インストール
 
