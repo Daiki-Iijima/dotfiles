@@ -1,0 +1,30 @@
+{{- if eq .chezmoi.os "windows" -}}
+# Windows 依存ツール導入
+$ErrorActionPreference = "Stop"
+
+Write-Host "[chezmoi] Windows 依存ツール導入"
+
+$packages = @(
+  "wez.wezterm",
+  "Neovim.Neovim",
+  "Starship.Starship",
+  "sharkdp.bat",
+  "eza-community.eza",
+  "BurntSushi.ripgrep.MSVC",
+  "junegunn.fzf",
+  "ajeetdsouza.zoxide",
+  "jesseduffield.lazygit",
+  "dandavison.delta",
+  "sharkdp.fd",
+  "twpayne.chezmoi",
+  "FiloSottile.age",
+  "Bitwarden.Bitwarden",
+  "Bitwarden.CLI"
+)
+
+foreach ($pkg in $packages) {
+  winget install --silent --accept-package-agreements --accept-source-agreements -e --id $pkg
+}
+
+Write-Host "[chezmoi] Windows 依存ツール導入完了"
+{{- end }}

@@ -1,0 +1,24 @@
+{{- /* OS別に適用しないファイルを指定 */ -}}
+
+{{- if ne .chezmoi.os "darwin" }}
+private_dot_config/private_karabiner/**
+{{- end }}
+
+{{- if ne .chezmoi.os "linux" }}
+private_dot_config/hypr/**
+private_dot_config/waybar/**
+private_dot_config/fuzzel/**
+private_dot_config/dunst/**
+private_dot_config/wlogout/**
+{{- end }}
+
+{{- if eq .chezmoi.os "windows" }}
+private_dot_config/tmux/**
+private_dot_config/yazi/**
+private_dot_config/btop/**
+private_dot_config/glow/**
+private_dot_config/ghostty/**
+dot_ssh/**
+{{- end }}
+
+README.md

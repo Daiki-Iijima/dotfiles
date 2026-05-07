@@ -1,0 +1,37 @@
+[user]
+	name = YOUR_NAME
+	email = YOUR_EMAIL
+	signingkey = /Users/daiki/.ssh/id_ed25519.pub
+	# signingkey はマシン毎に異なるので ~/.gitconfig.local で設定する
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /Users/daiki/.ssh/allowed_signers
+[commit]
+	gpgsign = false
+[tag]
+	gpgsign = false
+[core]
+	autocrlf = input
+	pager = delta
+[interactive]
+	difffilter = delta --color-only
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
+[merge]
+	conflictstyle = diff3
+[diff]
+	colormoved = default
+[pull]
+	rebase = true
+[include]
+	path = ~/.gitconfig.local
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential

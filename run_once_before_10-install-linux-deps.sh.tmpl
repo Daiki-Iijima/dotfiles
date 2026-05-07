@@ -1,0 +1,36 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[chezmoi] Linux 依存ツール導入"
+
+# Arch Linux 想定 (pacman)。他distroなら適宜書き換え。
+if command -v pacman &>/dev/null; then
+  sudo pacman -Syu --needed --noconfirm \
+    zsh starship zoxide atuin fzf \
+    zsh-autosuggestions zsh-syntax-highlighting \
+    bat eza ripgrep fd yazi \
+    git github-cli git-delta lazygit lazydocker \
+    neovim tmux mise btop glow \
+    age || true
+
+  # Hyprland 系
+  sudo pacman -S --needed --noconfirm \
+    hyprland waybar fuzzel dunst wlogout \
+    ghostty wl-clipboard || true
+
+  # AUR
+  if command -v yay &>/dev/null; then
+    yay -S --needed --noconfirm chezmoi-bin bitwarden-cli ghq lazysql || true
+  fi
+elif command -v apt-get &>/dev/null; then
+  echo "[WARN] Debian/Ubuntu 系は手動で apt install を推奨"
+fi
+
+# tmux TPM
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+
+echo "[chezmoi] Linux 依存ツール導入完了"
+{{- end }}

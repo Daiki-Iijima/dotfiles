@@ -1,0 +1,7 @@
+[[opener.text]]
+run = 'nvim "$@"'
+block = true
+
+[[opener.fallback]]
+run = 'nvim "$@"'
+block = true

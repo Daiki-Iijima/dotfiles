@@ -1,0 +1,8 @@
+{{- /* nvim は別repoの submodule なので external として取得 */ -}}
+
+[".config/nvim"]
+    type = "git-repo"
+    url = "https://github.com/Daiki-Iijima/nvim.git"
+    refreshPeriod = "168h"
+    [".config/nvim".pull]
+        args = ["--ff-only"]
