@@ -28,8 +28,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export GOPATH="$HOME/go"
 
 path=(
+{{- if eq .chezmoi.os "darwin" }}
   /opt/homebrew/bin
   /opt/homebrew/opt/llvm/bin
+{{- end }}
   /usr/local/bin
   "$GOPATH/bin"
   "$HOME/.local/bin"
@@ -46,8 +48,13 @@ fi
 autoload -Uz compinit && compinit
 
 # ---- Zsh Plugins -----------------------------------------------
+{{- if eq .chezmoi.os "darwin" }}
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+{{- else if eq .chezmoi.os "linux" }}
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+{{- end }}
 
 
 # ---- mise (言語バージョンマネージャー) --------------------------
