@@ -143,4 +143,6 @@ bindkey '^G' _navi_lazy_init
 # ---- starship プロンプト (最後に評価) ---------------------------
 eval "$(starship init zsh)"
 
-alias claude-mem='bun "/Users/daiki/.claude/plugins/cache/thedotmack/claude-mem/12.1.1/scripts/worker-service.cjs"'
+{{- if eq .chezmoi.os "darwin" }}
+alias claude-mem='bun "{{ .chezmoi.homeDir }}/.claude/plugins/cache/thedotmack/claude-mem/12.1.1/scripts/worker-service.cjs"'
+{{- end }}
