@@ -4,7 +4,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "/Users/daiki/.claude/statusline.sh",
+    "command": "{{ .chezmoi.homeDir }}/.claude/statusline.sh",
     "padding": 0
   },
   "enabledPlugins": {
@@ -50,12 +50,14 @@
   "agentPushNotifEnabled": true,
   "voiceEnabled": true,
   "mcpServers": {
+{{- if eq .chezmoi.os "darwin" }}
     "unity-mcp": {
-      "command": "~/.unity/relay/relay_mac_arm64.app/Contents/MacOS/relay_mac_arm64",
+      "command": "{{ .chezmoi.homeDir }}/.unity/relay/relay_mac_arm64.app/Contents/MacOS/relay_mac_arm64",
       "args": [
         "--mcp"
       ]
     }
+{{- end }}
   },
   "defaultMode": "acceptEdits"
 }
