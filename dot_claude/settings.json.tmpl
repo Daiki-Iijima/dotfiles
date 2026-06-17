@@ -18,7 +18,8 @@
     "caveman@caveman": true,
     "frontend-design@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
-    "vercel@claude-plugins-official": true
+    "vercel@claude-plugins-official": true,
+    "skill-codex@skill-codex": true
   },
   "extraKnownMarketplaces": {
     "ecc": {
@@ -37,6 +38,12 @@
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
+      }
+    },
+    "skill-codex": {
+      "source": {
+        "source": "github",
+        "repo": "skills-directory/skill-codex"
       }
     }
   },
@@ -59,5 +66,29 @@
     }
 {{- end }}
   },
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"{{ .chezmoi.homeDir }}/.claude-context/claude-context-sync.sh\" pull >/dev/null 2>&1 || true",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"{{ .chezmoi.homeDir }}/.claude-context/claude-context-sync.sh\" push >/dev/null 2>&1 || true",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
 }
