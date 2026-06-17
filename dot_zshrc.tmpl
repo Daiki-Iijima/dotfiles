@@ -153,3 +153,14 @@ eval "$(starship init zsh)"
 {{- if eq .chezmoi.os "darwin" }}
 alias claude-mem='bun "{{ .chezmoi.homeDir }}/.claude/plugins/cache/thedotmack/claude-mem/12.1.1/scripts/worker-service.cjs"'
 {{- end }}
+
+# ---- Secrets (age-encrypted via chezmoi) ------------------------
+[ -f "$HOME/.config/zsh/secrets.zsh" ] && source "$HOME/.config/zsh/secrets.zsh"
+
+{{- if eq .chezmoi.os "darwin" }}
+
+# ---- Android / Capacitor build env -----------------------------
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+{{- end }}

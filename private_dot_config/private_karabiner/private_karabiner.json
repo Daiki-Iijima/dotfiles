@@ -117,6 +117,23 @@
                             "to": [{ "key_code": "left_command" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 1,
+                        "vendor_id": 57624
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "japanese_pc_nfer" },
+                            "to": [{ "key_code": "japanese_eisuu" }]
+                        },
+                        {
+                            "from": { "key_code": "japanese_pc_xfer" },
+                            "to": [{ "key_code": "japanese_kana" }]
+                        }
+                    ]
                 }
             ],
             "name": "Default profile",
