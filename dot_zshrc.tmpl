@@ -163,4 +163,11 @@ alias claude-mem='bun "{{ .chezmoi.homeDir }}/.claude/plugins/cache/thedotmack/c
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
 export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+
+# Added by Devin
+export PATH="{{ .chezmoi.homeDir }}/.codeium/windsurf/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="{{ .chezmoi.homeDir }}/.local/bin:$PATH"
 {{- end }}
