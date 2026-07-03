@@ -3,7 +3,7 @@
 # =============================================================================
 
 # --- フォント ---
-font-family = HackGen35 Console NF
+font-family = JetBrainsMono Nerd Font Mono
 font-size = 14
 font-style = Regular
 font-style-bold = Bold
@@ -15,7 +15,7 @@ window-width = 200
 window-height = 60
 window-padding-x = 8
 window-padding-y = 4
-background-opacity = 0.85
+background-opacity = 1.0
 
 # --- カーソル ---
 cursor-style = bar
@@ -25,7 +25,7 @@ scrollback-limit = 100000
 
 # --- キーバインド ---
 # JIS キーボードの「¥」をバックスラッシュに
-keybind = backslash=text:\x5c
+keybind = ¥=text:\x5c
 
 # Ctrl+Shift+C → コピー
 keybind = ctrl+shift+c=copy_to_clipboard
