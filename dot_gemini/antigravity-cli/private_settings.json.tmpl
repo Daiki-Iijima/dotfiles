@@ -1,0 +1,18 @@
+{
+  "colorScheme": "dark",
+  "enableTelemetry": false,
+  "permissions": {
+    "allow": [
+      "command(git status)",
+      "command(git branch)",
+      "command(git log)",
+      "command(git checkout)",
+      "command(git pull)",
+      "command(git merge)"
+    ]
+  },
+  "toolPermission": "always-proceed",
+  "trustedWorkspaces": [
+    "{{ .chezmoi.homeDir }}"
+  ]
+}
