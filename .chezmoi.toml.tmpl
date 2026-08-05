@@ -1,0 +1,15 @@
+{{- /*
+  chezmoi init 時に ~/.config/chezmoi/chezmoi.toml を自動生成する。
+  これが無いと新環境で age 復号の設定が無く、暗号化ファイルが展開できない。
+  recipient は公開鍵なので平文で問題ない。秘密鍵は key.txt 側 (Bitwarden から取得)。
+*/ -}}
+encryption = "age"
+
+[age]
+    identity = "~/.config/chezmoi/key.txt"
+    recipient = "age1trgpae8a3nk9w593lr5px64wt2juy692ct0yk8g907m2p0zuh5eqgrc93f"
+
+[data]
+    name = "Daiki Iijima"
+    email = "40718695+Daiki-Iijima@users.noreply.github.com"
+    github_user = "Daiki-Iijima"

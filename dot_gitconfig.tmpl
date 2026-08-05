@@ -1,12 +1,11 @@
 [user]
-	name = YOUR_NAME
-	email = YOUR_EMAIL
-	signingkey = /Users/daiki/.ssh/id_ed25519.pub
-	# signingkey はマシン毎に異なるので ~/.gitconfig.local で設定する
+	name = {{ .name }}
+	email = {{ .email }}
+	signingkey = {{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	allowedSignersFile = /Users/daiki/.ssh/allowed_signers
+	allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
 [commit]
 	gpgsign = false
 [tag]

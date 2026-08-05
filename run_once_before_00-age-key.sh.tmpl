@@ -1,0 +1,64 @@
+{{- if ne .chezmoi.os "windows" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# age 秘密鍵を Bitwarden から取得する。
+#
+# これが暗号化ファイル (SSH 鍵 12 本 / .ssh/config / secrets.zsh / .env) の
+# 復号に必要なため、ファイル展開より前 (run_once_before_) に実行する。
+#
+# 事前準備 (旧マシンで一度だけ):
+#   bw create item ... で "chezmoi-age-key" というセキュアメモを作り、
+#   notes に ~/.config/chezmoi/key.txt の中身をそのまま貼る。
+
+KEY="${HOME}/.config/chezmoi/key.txt"
+ITEM="chezmoi-age-key"   # Bitwarden 上のアイテム名
+
+if [ -f "$KEY" ]; then
+  echo "[chezmoi] age 鍵は配置済み"
+  exit 0
+fi
+
+echo "[chezmoi] age 鍵が無いので Bitwarden から取得する"
+
+# --- bw コマンドを用意 (Brewfile 適用より前なので自前で入れる) ---
+if ! command -v bw &>/dev/null; then
+  if ! command -v brew &>/dev/null; then
+    echo "[chezmoi] Homebrew を導入"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+  eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || true)"
+  echo "[chezmoi] bitwarden-cli を導入"
+  brew install bitwarden-cli jq
+fi
+eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || true)"
+
+# --- ログイン / アンロック (対話) ---
+if [ "$(bw status | jq -r .status)" = "unauthenticated" ]; then
+  echo "[chezmoi] Bitwarden にログインしてください"
+  bw login
+fi
+
+BW_SESSION="$(bw unlock --raw)"
+export BW_SESSION
+bw sync --session "$BW_SESSION" >/dev/null
+
+# --- 鍵を取り出す ---
+mkdir -p "$(dirname "$KEY")"
+if ! bw get item "$ITEM" --session "$BW_SESSION" | jq -r '.notes' > "$KEY"; then
+  rm -f "$KEY"
+  echo "[chezmoi] ★ Bitwarden から '$ITEM' を取得できなかった。" >&2
+  echo "         旧マシンの ~/.config/chezmoi/key.txt を手で配置してから再実行すること。" >&2
+  exit 1
+fi
+chmod 600 "$KEY"
+
+# --- 妥当性チェック (壊れた鍵で進むと全ファイルが復号失敗するため) ---
+if ! grep -q "AGE-SECRET-KEY-" "$KEY"; then
+  rm -f "$KEY"
+  echo "[chezmoi] ★ 取得した内容が age 秘密鍵ではない。Bitwarden の '$ITEM' の notes を確認すること。" >&2
+  exit 1
+fi
+
+echo "[chezmoi] age 鍵を配置した"
+{{- end }}
