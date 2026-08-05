@@ -1,6 +1,5 @@
 tap "getsentry/xcodebuildmcp", trusted: true
 tap "homebrew-ffmpeg/ffmpeg", trusted: true
-tap "multica-ai/tap", trusted: true
 tap "stripe/stripe-cli", trusted: true
 # Simple, modern, secure file encryption
 brew "age"
@@ -172,8 +171,6 @@ brew "zsh-syntax-highlighting"
 brew "getsentry/xcodebuildmcp/xcodebuildmcp"
 # Play, record, convert, and stream audio and video
 brew "homebrew-ffmpeg/ffmpeg/ffmpeg"
-# Multica CLI — local agent runtime and management tool for the Multica platform
-brew "multica-ai/tap/multica"
 # Stripe CLI utility
 brew "stripe/stripe-cli/stripe"
 # Desktop password and login vault
