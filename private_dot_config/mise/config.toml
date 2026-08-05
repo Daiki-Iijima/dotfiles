@@ -5,3 +5,21 @@ node = "lts"
 python = "3.11.15"
 ruby = "latest"
 rust = "latest"
+
+# グローバルパッケージも mise で宣言的に管理する。
+# `mise install` だけで CLI 一式が揃うため、新環境で個別の
+# npm i -g / cargo install / pipx install / go install が不要になる。
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@openai/codex" = "latest"
+"npm:@mermaid-js/mermaid-cli" = "latest"
+"npm:gitnexus" = "latest"
+"npm:pnpm" = "latest"
+
+"cargo:cargo-watch" = "latest"
+"cargo:cargo-zigbuild" = "latest"
+"cargo:trunk" = "latest"
+"cargo:sqlx-cli" = "latest"
+
+"pipx:ocrmypdf" = "latest"
+
+"go:golang.org/x/tools/gopls" = "latest"

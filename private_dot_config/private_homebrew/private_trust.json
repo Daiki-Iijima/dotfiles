@@ -1,0 +1,8 @@
+{
+  "trustedtaps": [
+    "getsentry/xcodebuildmcp",
+    "homebrew-ffmpeg/ffmpeg",
+    "multica-ai/tap",
+    "stripe/stripe-cli"
+  ]
+}

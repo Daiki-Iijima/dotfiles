@@ -1,0 +1,260 @@
+tap "getsentry/xcodebuildmcp", trusted: true
+tap "homebrew-ffmpeg/ffmpeg", trusted: true
+tap "multica-ai/tap", trusted: true
+tap "stripe/stripe-cli", trusted: true
+# Simple, modern, secure file encryption
+brew "age"
+# Portable library for importing many well-known 3D model formats
+brew "assimp"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.14"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Secure and free password manager for all of your devices
+brew "bitwarden-cli"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
+# Software library to render fonts
+brew "freetype"
+# Binary installation for rust projects
+brew "cargo-binstall"
+# C++ template library for linear algebra
+brew "eigen"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Cloudflare Tunnel client (formerly Argo Tunnel)
+brew "cloudflared"
+# Cross-platform make
+brew "cmake"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
+# Container runtimes on MacOS (and Linux) with minimal setup
+brew "colima"
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
+# LLVM bytecode to JavaScript compiler
+brew "emscripten"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Lint your Python code for style and logical errors
+brew "flake8"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Remote repository management made easy
+brew "ghq"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Quickly rewrite git repository history
+brew "git-filter-repo"
+# Git extension for versioning large files
+brew "git-lfs"
+# Render markdown on the CLI
+brew "glow"
+# OpenGL and OpenGL ES reference compiler for shading languages
+brew "glslang"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Fast linters runner for Go
+brew "golangci-lint"
+# GNU troff text-formatting system
+brew "groff"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Convert images to PDF via direct JPEG inclusion
+brew "img2pdf"
+# Lazier way to manage everything docker
+brew "lazydocker"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Cross-platform TUI database management tool
+brew "lazysql"
+# Subtitle renderer for the ASS/SSA subtitle format
+brew "libass"
+# Library to communicate with iOS devices natively
+brew "libimobiledevice"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# Generic machine emulator and virtualizer
+brew "qemu"
+# Additional guest agents for Lima
+brew "lima-additional-guestagents"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Language Server for the Lua language
+brew "lua-language-server"
+# Tool for linting and static analysis of Lua code
+brew "luacheck"
+# Mac App Store command-line interface
+brew "mas"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
+# Implementation of the Vulkan graphics and compute API on top of Metal
+brew "molten-vk"
+# Incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Port scanning utility for large networks
+brew "nmap"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Open source computer vision library
+brew "opencv"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
+# Collection of tools, libraries, and tests for Vulkan shader compilation
+brew "shaderc"
+# Performing reflection and disassembling SPIR-V
+brew "spirv-cross"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Enables extra languages support for Tesseract
+brew "tesseract-lang"
+# Terminal multiplexer
+brew "tmux"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Vulkan Header files and API registry
+brew "vulkan-headers"
+# Vulkan ICD Loader
+brew "vulkan-loader"
+# Vulkan utilities and tools
+brew "vulkan-tools"
+# Vulkan layers that enable developers to verify correct use of the Vulkan API
+brew "vulkan-validationlayers"
+# Build server protocol implementation for integrating Xcode with sourcekit-lsp
+brew "xcode-build-server"
+# Generate your Xcode project from a spec file and your folder structure
+brew "xcodegen"
+# Friendly and fast tool for sending HTTP requests
+brew "xh"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
+# Programming language designed for robustness, optimality, and clarity
+brew "zig"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Additional completion definitions for zsh
+brew "zsh-completions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# Model Context Protocol server for Xcode project workflows
+brew "getsentry/xcodebuildmcp/xcodebuildmcp"
+# Play, record, convert, and stream audio and video
+brew "homebrew-ffmpeg/ffmpeg/ffmpeg"
+# Multica CLI — local agent runtime and management tool for the Multica platform
+brew "multica-ai/tap/multica"
+# Stripe CLI utility
+brew "stripe/stripe-cli/stripe"
+# Desktop password and login vault
+cask "bitwarden"
+# 3D point cloud and mesh processing software
+cask "cloudcompare"
+cask "font-hackgen-nerd"
+cask "font-jetbrains-mono-nerd-font"
+# GIT client
+cask "fork"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Web browser
+cask "google-chrome"
+# Mesh processing system
+cask "meshlab"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# JDK from the Eclipse Foundation (Adoptium)
+cask "temurin@17"
+# Virtual machines UI using QEMU
+cask "utm"
+# Network protocol analyzer
+cask "wireshark-app"
+# Multiplayer code editor
+cask "zed"
+mas "Amphetamine", id: 937984704
+mas "Brother iPrint&Scan", id: 1193539993
+mas "Friendly Streaming", id: 553245401
+mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
+mas "Kindle", id: 302584613
+mas "LINE", id: 539883307
+mas "Magnet", id: 441258766
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Xcode", id: 497799835
+go "cmd/go"
+go "cmd/gofmt"
+cargo "cargo-watch"
+cargo "cargo-zigbuild"
+cargo "sqlx-cli"
+cargo "trunk"
+cargo "xh"
+npm "@anthropic-ai/claude-code"
+npm "@mermaid-js/mermaid-cli"
+npm "@openai/codex"
+npm "corepack"
+npm "gitnexus"
+npm "pnpm"
+
+# ---------------------------------------------------------------
+# 手動インストールだったアプリを cask に寄せたもの (2026-08-05 追加)
+# この Mac では既に手動導入済みのため未 adopt。新 Mac では
+# `brew bundle` がそのまま導入する。
+# 既存アプリを brew 管理下に取り込みたい場合は
+#   brew install --cask --adopt <token>
+# ---------------------------------------------------------------
+cask "alt-tab"                # ウィンドウ切り替え
+cask "balenaetcher"           # イメージ書き込み
+cask "blender"                # 3DCG
+cask "bruno"                  # API クライアント
+cask "claude"                 # Claude Desktop
+cask "discord"
+cask "drawio"                 # 作図
+cask "gimp"                   # 画像編集
+cask "godot"                  # ゲームエンジン
+cask "jetbrains-toolbox"
+cask "karabiner-elements"     # キーリマップ
+cask "keka"                   # 圧縮解凍
+cask "logi-options+"          # Logicool デバイス設定 (lghub 後継)
+cask "microsoft-office"       # Word / Excel / PowerPoint / OneNote
+cask "microsoft-teams"
+cask "notion"
+cask "notion-calendar"
+cask "notion-mail"
+cask "obs"                    # 配信録画
+cask "ollama"                 # ローカル LLM (モデルは別途 ollama pull)
+cask "raspberry-pi-imager"
+cask "steam"
+cask "superset"
+cask "tailscale"              # VPN
+cask "unity-hub"              # Unity Editor は Hub から導入
+cask "zen"                    # ブラウザ

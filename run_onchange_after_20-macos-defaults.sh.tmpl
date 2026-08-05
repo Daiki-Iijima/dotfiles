@@ -1,0 +1,43 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# このスクリプトは 2026-08-05 時点でこの Mac に実際に設定されていた
+# 値だけを再現する。macOS 既定値のままの項目は意図的に含めていない。
+
+CHANGED=0
+
+set_default() {
+  local domain="$1" key="$2" type="$3" value="$4"
+  local current
+  current=$(defaults read "$domain" "$key" 2>/dev/null || echo "__UNSET__")
+  if [ "$current" != "$value" ]; then
+    defaults write "$domain" "$key" "-$type" "$value"
+    echo "  $domain $key: $current → $value"
+    CHANGED=1
+  fi
+}
+
+echo "[chezmoi] macOS システム設定"
+
+# キーリピートを有効化 (長押しのアクセント入力を無効化 / vim 操作用)
+set_default NSGlobalDomain ApplePressAndHoldEnabled bool 0
+# 拡張子を常に表示
+set_default NSGlobalDomain AppleShowAllExtensions bool 1
+
+# Dock: 自動的に隠す / アイコンサイズ
+set_default com.apple.dock autohide bool 1
+set_default com.apple.dock tilesize int 49
+
+# Finder: カラム表示をデフォルトに / 不可視ファイルを表示
+set_default com.apple.finder FXPreferredViewStyle string clmv
+set_default com.apple.finder AppleShowAllFiles bool TRUE
+
+if [ "$CHANGED" = "1" ]; then
+  killall Dock 2>/dev/null || true
+  killall Finder 2>/dev/null || true
+  echo "[chezmoi] Dock / Finder を再起動した"
+else
+  echo "[chezmoi] 変更なし"
+fi
+{{- end }}

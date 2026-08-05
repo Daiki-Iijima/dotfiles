@@ -1,0 +1,51 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Brewfile が変わったら再実行させるためのハッシュ
+# Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
+
+BREWFILE="$HOME/.Brewfile"
+FRESH=0
+
+echo "[chezmoi] macOS 依存ツール導入"
+
+# ---- Homebrew ---------------------------------------------------
+if ! command -v brew &>/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  FRESH=1
+fi
+
+# ---- Brewfile ---------------------------------------------------
+# 新規マシン (Homebrew を今入れた) なら一括導入する。
+# 既存マシンでは差分の報告のみ。手動導入したアプリを brew が
+# 「未導入」と誤認して再ダウンロードするのを避けるため。
+if [ ! -f "$BREWFILE" ]; then
+  echo "[chezmoi] $BREWFILE が無いのでスキップ"
+elif [ "$FRESH" = "1" ]; then
+  echo "[chezmoi] 新規マシンのため Brewfile を一括適用"
+  brew bundle install --file="$BREWFILE"
+elif brew bundle check --file="$BREWFILE" &>/dev/null; then
+  echo "[chezmoi] Brewfile と一致"
+else
+  # check は差分があると終了コード 1 を返すので、報告目的では失敗扱いにしない
+  echo "[chezmoi] Brewfile に差分あり (自動導入はしない):"
+  { brew bundle check --file="$BREWFILE" --verbose 2>&1 || true; } | sed 's/^/    /' | head -30
+  echo "    → 導入するなら: brew bundle install --file=$BREWFILE"
+fi
+
+# ---- 言語ランタイム + グローバルパッケージ ----------------------
+# 一覧は ~/.config/mise/config.toml (chezmoi 管理) にある
+if command -v mise &>/dev/null && [ "$FRESH" = "1" ]; then
+  echo "[chezmoi] mise install"
+  mise install || true
+fi
+
+# ---- tmux TPM ---------------------------------------------------
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+
+echo "[chezmoi] macOS 依存ツール導入完了"
+{{- end }}
