@@ -2,6 +2,7 @@
   "env": {
     "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1"
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -141,6 +142,8 @@
     }
   },
   "language": "日本語",
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
@@ -159,7 +162,5 @@
     }
 {{- end }}
   },
-  "defaultMode": "acceptEdits",
-  "effortLevel": "high",
-  "tui": "fullscreen"
+  "defaultMode": "acceptEdits"
 }

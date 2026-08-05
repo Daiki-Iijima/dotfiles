@@ -1,18 +1,29 @@
 {
+  "allowNonWorkspaceAccess": true,
   "colorScheme": "dark",
-  "enableTelemetry": false,
+  "model": "Gemini 3.5 Flash (High)",
   "permissions": {
     "allow": [
-      "command(git status)",
-      "command(git branch)",
-      "command(git log)",
-      "command(git checkout)",
-      "command(git pull)",
-      "command(git merge)"
+      "command(git diff)"
     ]
+  },
+  "statusLine": {
+    "type": "",
+    "command": "",
+    "enabled": true
   },
   "toolPermission": "always-proceed",
   "trustedWorkspaces": [
-    "{{ .chezmoi.homeDir }}"
+    "{{ .chezmoi.homeDir }}/ghq/13-159-117-250.sslip.io/iijima/voxel-web-poc",
+    "{{ .chezmoi.homeDir }}/ghq/github.com/Daiki-Iijima/atla",
+    "{{ .chezmoi.homeDir }}/Desktop/raw-http-server",
+    "{{ .chezmoi.homeDir }}/Desktop/express-mini",
+    "{{ .chezmoi.homeDir }}/Desktop",
+    "{{ .chezmoi.homeDir }}/Desktop/express-minis",
+    "{{ .chezmoi.homeDir }}/.config/nvim",
+    "{{ .chezmoi.homeDir }}/Desktop/express-minis/raw-http-server",
+    "{{ .chezmoi.homeDir }}/ghq/13-159-117-250.sslip.io/iijima/voxel-web-poc/tools/spatial-workbench",
+    "{{ .chezmoi.homeDir }}/Desktop/express-minis/express-mini/steps-ts",
+    "{{ .chezmoi.homeDir }}/Desktop/json-balidate-cli"
   ]
 }

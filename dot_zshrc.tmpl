@@ -1,8 +1,3 @@
-# ---- tmux 自動起動 -----------------------------------------------
-if [[ -z "$TMUX" && -n "$PS1" && -x "$(command -v tmux)" ]]; then
-  exec tmux new-session -A -s main
-fi
-
 # ---- Zsh Options -----------------------------------------------
 setopt AUTO_CD
 setopt HIST_IGNORE_ALL_DUPS
@@ -40,6 +35,11 @@ path=(
 )
 typeset -U path   # PATH の重複エントリを自動除去
 export PATH
+
+# ---- tmux 自動起動 -----------------------------------------------
+if [[ -z "$TMUX" && -z "$ZELLIJ" && -n "$PS1" && -x "$(command -v tmux)" ]]; then
+  exec tmux new-session -A -s main
+fi
 
 # ---- Zsh Completions -------------------------------------------
 if type brew &>/dev/null; then
