@@ -199,7 +199,6 @@ cask "wireshark-app"
 cask "zed"
 mas "Amphetamine", id: 937984704
 mas "Brother iPrint&Scan", id: 1193539993
-mas "Friendly Streaming", id: 553245401
 mas "Keynote", id: 409183694
 mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
